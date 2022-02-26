@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.ArrayList;
-
+import java.util.Scanner;  // Import the Scanner class
+ 
 public class testing{
 
    public static void main(String[] args) {
@@ -36,40 +37,29 @@ public class testing{
     collectionName.add(name);
 
     Scanner myObj = new Scanner(System.in);
+    Integer selected = 1;
 
-
-    mainMenu(collection);
+    mainMenu(collection,selected);
    }
 
-  public static String getInput(){
-      
-      System.out.println("Please enter a command:");
-      Scanner input = new Scanner(System.in);
-      input.nextLine();
-      String choice = input.nextLine();
-      //input.close();
 
-      return (choice);
-
-
-  }
 
    
-   public static void mainMenu(ArrayList<ArrayList<Integer>> collection){
+   public static void mainMenu(ArrayList<ArrayList<Integer>> collection,Integer selected){
     System.out.println("\n\nThe commands are:\n \nshow \nnew \nselect \ndelete \nsort \nreverse \nrandomize \nsave \nrestore \nquit.\n");
 
-    String choice = getInput();
+    System.out.println("Please enter a command:");
+    Scanner input = new Scanner(System.in);
+    String choice = input.nextLine();
+    input.close();
        switch(choice){
            case "show":
-           show(collection);
+           show(collection,selected);
            break;
+
            case "new":
-
-           ArrayList<Integer> tempArray = menuNew(collection);
-
-           collection.add(tempArray);
+           menuNew(collection);
            System.out.println(collection);
-           mainMenu(collection);
            break;
        }
        //myObj.close();
@@ -78,50 +68,101 @@ public class testing{
 
    }
    
-   public static void show(ArrayList<ArrayList<Integer>> collection){
+   public static void show(ArrayList<ArrayList<Integer>> collection,Integer selected){
+
     collection.size();
+    String[] alphabet = {"A. ","B. ","C. ","D. ","E. ","F. ","G. ","H. ","I. ","J. " ,"K. ","L. ","M. ","N. ","O. ","P. ","Q. ","S. ","T. ","U. ","V. ","W. ","X. ","Y. ","Z. "};
     for (int i = 0; i < collection.size(); i++) {
-        System.out.println((collection.get(i)));
+        if (i-1 == selected){
+        System.out.println("*"+alphabet[i]+(collection.get(i)));
+        }
     }
-    
-    mainMenu(collection);
+    mainMenu(collection,selected);
    }
    
-   public static ArrayList menuNew(ArrayList<ArrayList<Integer>> collection) {
+   public static void menuNew(ArrayList<ArrayList<Integer>> collection) {
     Scanner myObj = new Scanner(System.in);
+
+
 
     ArrayList<Integer> temp = new ArrayList<Integer>();
 
-    myObj.nextLine();
     System.out.println("\n What is the length of the Array List");
     Integer arraySize = myObj.nextInt();
+
     for (int i = 0; i < arraySize; i++) {
-        myObj.nextLine();
         System.out.println("\n What is elment #"+i);
         Integer quickTemp = myObj.nextInt();
         temp.add(quickTemp);
 
         
     }
+    myObj.close();
 
     System.out.println(temp);
+    collection.add(temp);
+    //mainMenu(collection);
 
+   }
+      
+   public static void select(ArrayList<ArrayList<Integer>> collection,Integer selected) {
+        Scanner myObj = new Scanner(System.in);
+       show(collection, selected);
+       System.out.println("Which ArrayList would you like to make yours? (A-Z)");
+       String selection = myObj.nextLine();
 
-    myObj.close();
-    return (temp);
+ 
+
+       show(collection,selected);
+
 
 
    }
    
-   
-   
-   
-   public static void select() {
+   public static void delete(ArrayList<ArrayList<Integer>> collection,Integer selected) {
+        Scanner myObj = new Scanner(System.in);
+
+
+       show(collection,selected);
+       System.out.println("Which would you like to delete> (A-Z)");
+       String choice = myObj.nextLine();
+        selected = alphaToInt(choice);
+
    }
    
-   public static void delete() {
+   public static int alphaToInt(String selection){
+    int selected = 0;
+    switch(selection){
+        case "A": selected = 1;
+        case "B": selected = 2;
+        case "C": selected = 3; 
+        case "D": selected = 4;
+        case "E": selected = 5;
+        case "F": selected = 6;
+        case "G": selected = 7;
+        case "H": selected = 8;
+        case "I": selected = 9;
+        case "J": selected = 10; 
+        case "K": selected = 11;
+        case "L": selected = 12;
+        case "M": selected = 13;
+        case "N": selected = 14;
+        case "O": selected = 15;
+        case "P": selected = 16;
+        case "Q": selected = 17; 
+        case "R": selected = 18;
+        case "S": selected = 19;
+        case "T": selected = 20;
+        case "U": selected = 21;
+        case "V": selected = 22;
+        case "W": selected = 23;
+        case "X": selected = 24; 
+        case "Y": selected = 25;
+        case "Z": selected = 26;
    }
-   
+   return selected ;
+   }
+
    public static void sort() {
    }
    
